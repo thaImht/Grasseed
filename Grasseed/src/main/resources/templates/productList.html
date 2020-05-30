@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>商品列表</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+    </script>
+    <script>
+   		$.post("/mall/o/productList",{},
+   		function(result,status){
+   			if(status==='success'){
+   				if(result.code==='G00000'){
+   					var data = result.data;
+   					for(var i=0;i<data.length;i++){
+   						var product = data[i];
+   						$("#list").append(addProduct(product));
+   					}
+   				}
+   			}
+   		});
+   		function  addProduct(product){
+   			return '<div>商品名称：'+product.productName+'  商品价格：' + product.price +'分</div>';
+   		}
+    </script>
+</head>
+<body>
+<div id='list'>
+  
+</div>
+</body>
+</html>
