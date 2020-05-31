@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.hetao.grasseed.dao.ProductRepository;
 import com.hetao.grasseed.model.entity.Product;
+import com.hetao.grasseed.model.request.OneProductRequest;
 import com.hetao.grasseed.model.response.GrasseedResponse;
 import com.hetao.grasseed.model.response.GrasseedResponseBuilder;
 import com.hetao.grasseed.service.MallService;
@@ -24,6 +25,12 @@ public class MallServiceImpl implements MallService{
 	public GrasseedResponse productList() {
 		List<Product> products = productRepository.findByIsOnlineTrue();
 		return GrasseedResponseBuilder.buildSuccssResponse(products);
+	}
+
+	@Override
+	public GrasseedResponse productDetail(OneProductRequest req) {
+		Product product = productRepository.findByProductCode(req.getProductCode());
+		return GrasseedResponseBuilder.buildSuccssResponse(product);
 	}
 
 }

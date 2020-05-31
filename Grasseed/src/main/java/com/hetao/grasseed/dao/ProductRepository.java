@@ -10,5 +10,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 
 	List<Product> findByIsOnlineTrue();
 
+	Product findByProductCode(String productCode);
+
 
 }

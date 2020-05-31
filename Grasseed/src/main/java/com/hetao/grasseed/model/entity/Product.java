@@ -32,7 +32,7 @@ public class Product {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 	
-	@Column(length = 20)
+	@Column(length = 20,unique=true,nullable=false)
     private String productCode;//商品码
 	
 	@Column(length = 50)

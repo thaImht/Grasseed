@@ -14,10 +14,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 public class WxUtil {
-	@Value("${wx.activity.appid}")
+	@Value("${wx.appid}")
    	private String appId;
 	
-	@Value("${wx.activity.appsecret}")
+	@Value("${wx.appsecret}")
    	private String appSecret;
 	
 	@Autowired
