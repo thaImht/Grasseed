@@ -6,6 +6,7 @@
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
     </script>
     <script>
+    var product;
     function getQueryVariable(variable){
        var query = window.location.search.substring(1);
        var vars = query.split("&");
@@ -21,11 +22,11 @@
      type: 'POST',  
      url: "/mall/o/productDetail",  
      dataType: "json",  
-     data: {"productCode": getQueryVariable('productCode') },   
+     data: JSON.stringify(GetJsonData()) ,   
      success: function (message) { 
                 console.log(message); 
                 if(message.code==='G00000'){
-   					var product = message.data;
+   					product = message.data;
    					$("#productName").text(product.productName);
    					$("#productPrice").text("¥"+changeMoney(product.price));
    				}
@@ -36,6 +37,11 @@
             }
       });
    		
+    function GetJsonData() {
+        var json = {"productCode": getQueryVariable('productCode') };
+        return json;
+    }   
+    
    		// 金额转换
 		function changeMoney(num) {
 		 var regexp = /(?:\.0*|(\.\d+?)0+)$/
@@ -49,6 +55,15 @@
 		 }
 		}
 
+		$(document).ready(function(){
+			  $("#buy").click(function(){
+				  var url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx5ee2acdc34ef926d&redirect_uri="+encodeURIComponent("http://www.grasseed.com/mall/o/addOrder?productCode="+product.productCode+"&price="+product.price)+"&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
+				  $.get(url,{},
+					   		function(result,status){
+					   			
+					   		});
+			  });
+		});
     </script>
 </head>
 <body>
@@ -57,6 +72,7 @@
 		<img class="v-img" src="/picture/pd-zf-7.jpg">
 		<p id='productName'></p>
 		<p class="aui-slide-item-info"><span id='productPrice'></span></p>
+		<a id='buy'>立即购买</a>
 	</li>
 </div>
 </body>
