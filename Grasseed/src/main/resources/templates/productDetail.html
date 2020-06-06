@@ -5,6 +5,53 @@
     <title>商品详情</title>
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
     </script>
+     <style type="text/css">
+    #list {
+    width: 100%;
+    background: #fff;
+    height: 100%;
+    flex-wrap: wrap;
+}
+li  {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    margin-bottom: 1.18rem !important;
+    margin: 5px;
+    padding: 0px;
+    list-style: none;
+    width: 99%;
+}
+img {
+    border-radius: 0.1875rem !important;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    border-style: none;
+    width: auto;  
+    height: auto;  
+    max-width: 100%;  
+    max-height: 100%;
+}
+p{
+     line-height: 1.15;
+     font-weight: 400;
+     font-size: 2em;
+     color: #333;
+     font-family: "FZLTHJ";
+}
+#buy{
+    background-color: #FF5E53;
+    color: #fff;
+    font-size: 25px;
+    line-height: 60px;
+    display: inline-block;
+    float: left;
+    width: 30%;
+    text-align:center;
+}
+</style>
     <script>
     var product;
     function getQueryVariable(variable){
@@ -28,6 +75,7 @@
                 if(message.code==='G00000'){
    					product = message.data;
    					$("#productName").text(product.productName);
+   					$("#description").text(product.description);
    					$("#productPrice").text("¥"+changeMoney(product.price));
    				}
                },      
@@ -68,10 +116,11 @@
 </head>
 <body>
 <div id='list'>
-    <li class="aui-slide-item-item">
-		<img class="v-img" src="/picture/pd-zf-7.jpg">
+    <li >
+		<img  src="/picture/kecheng.jpg">
 		<p id='productName'></p>
-		<p class="aui-slide-item-info"><span id='productPrice'></span></p>
+		<p id='description'></p>
+		<p id='productPrice'></p>
 		<a id='buy'>立即购买</a>
 	</li>
 </div>
