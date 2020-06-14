@@ -52,6 +52,11 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.58</version>
 		</dependency>
+		<dependency>
+            <groupId>net.lshift.diffa</groupId>
+            <artifactId>snowflake</artifactId>
+            <version>1.7.0</version>
+        </dependency>
 		<!-- db start -->
 		<dependency>
 			<groupId>mysql</groupId>

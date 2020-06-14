@@ -106,24 +106,10 @@ p{
 		$(document).ready(function(){
 			  $("#buy").click(function(){
 				  var url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx5ee2acdc34ef926d&redirect_uri="+encodeURIComponent("http://www.grasseed.com/mall/o/addOrder?productCode="+product.productCode+"&price="+product.price)+"&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
-				   $.ajax({     
-					     contentType: 'application/json',  
-					     type: 'POST',  
-					     url: "/mall/o/addOrder",  
-					     dataType: "json",  
-					     data: JSON.stringify(GetJsonData()) ,   
-					     success: function (message) { 
-					                console.log(message); 
-					                if(message.code==='G00000'){
-					   					var orderInfo = message.data;
-					   					
-					   				}
-					               },      
-					     error: function (message) {  
-					     		console.log(message);		
-					     		alert("提交数据失败！"+message);		
-					            }
-					      });
+				  $.get(url,{},
+					   		function(result,status){
+					            alert("数据: " + data + "\n状态: " + status);
+					   		});
 			  });
 		});
     </script>
