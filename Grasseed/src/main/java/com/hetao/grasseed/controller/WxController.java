@@ -158,13 +158,13 @@ public class WxController {
 	}
 	
 	/**
-	 * 返回MP_verify_Zy77HqVZZzQYRzh2.txt文件
+	 * 返回MP_verify_e7pVkVyrfI0GcSDA.txt文件
 	 * @param req
 	 * @return
 	 */
-	@RequestMapping("/MP_verify_Zy77HqVZZzQYRzh2.txt")
+	@RequestMapping("/MP_verify_e7pVkVyrfI0GcSDA.txt")
 	public void file(HttpServletResponse response){
-		Resource resource = new ClassPathResource("MP_verify_Zy77HqVZZzQYRzh2.txt");
+		Resource resource = new ClassPathResource("MP_verify_e7pVkVyrfI0GcSDA.txt");
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		try {
 			InputStream  fis = resource.getInputStream();
@@ -180,7 +180,7 @@ public class WxController {
 		}
 		
 		response.setContentType("application/octet-stream;charset=UTF-8");
-        response.setHeader("Content-Disposition", "attachment;filename=MP_verify_Zy77HqVZZzQYRzh2.txt");
+        response.setHeader("Content-Disposition", "attachment;filename=MP_verify_e7pVkVyrfI0GcSDA.txt");
         response.addHeader("Pargam", "no-cache");
         response.addHeader("Cache-Control", "no-cache");
         try {
