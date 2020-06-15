@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.hetao.grasseed.common.https.HttpsUtils;
 import com.hetao.grasseed.common.util.WxInfoUtil;
@@ -193,4 +194,43 @@ public class WxController {
             log.warn("微信校验文件导出:{}",e);
         }
 	}
+	
+	@PostMapping("/wx/menu")
+	@ResponseBody
+	public String menu() {
+		log.info("menu");
+		//获取access_token
+		String accessToken = wxUtil.getAccessToken();
+		
+		JSONObject button = new JSONObject();
+		JSONArray buttons  = new JSONArray();
+		
+		JSONObject button1 = new JSONObject();
+		JSONArray subButton1s  = new JSONArray();
+		JSONObject button11 = new JSONObject();
+		button11.put("type", "view");
+		button11.put("name", "精品课程");
+		button11.put("url", "http://www.grasseed.com/productList");
+		subButton1s.add(button11);
+		button1.put("name", "课程介绍");
+		button1.put("sub_button", subButton1s);
+		
+		JSONObject button2 = new JSONObject();
+		button2.put("type", "click");
+		button2.put("name", "待开发");
+		button2.put("key", "20");
+		
+		JSONObject button3 = new JSONObject();
+		button3.put("type", "click");
+		button3.put("name", "待开发");
+		button3.put("key", "30");
+		
+		buttons.add(0, button1);
+		buttons.add(1, button2);
+		buttons.add(2, button3);
+		button.put("button", buttons);
+		String result = HttpsUtils.postJSON("https://api.weixin.qq.com/cgi-bin/menu/create?access_token="+accessToken, button.toJSONString());
+		return result;
+	}
+	
 }
