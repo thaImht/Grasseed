@@ -195,7 +195,7 @@ public class WxController {
         }
 	}
 	
-	@PostMapping("/wx/menu")
+	@RequestMapping("/wx/menu")
 	@ResponseBody
 	public String menu() {
 		log.info("menu");
