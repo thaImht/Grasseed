@@ -106,10 +106,7 @@ p{
 		$(document).ready(function(){
 			  $("#buy").click(function(){
 				  var url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx5ee2acdc34ef926d&redirect_uri="+encodeURIComponent("http://www.grasseed.com/mall/o/addOrder?productCode="+product.productCode+"&price="+product.price)+"&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
-				  $.get(url,{},
-					   		function(result,status){
-					            alert("数据: " + data + "\n状态: " + status);
-					   		});
+				  window.location.href =url;
 			  });
 		});
     </script>

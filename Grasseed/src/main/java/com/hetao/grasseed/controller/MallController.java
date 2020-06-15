@@ -3,19 +3,18 @@ package com.hetao.grasseed.controller;
 
 
 import java.io.IOException;
-import java.net.URLDecoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.hetao.grasseed.model.request.OneProductRequest;
 import com.hetao.grasseed.model.response.GrasseedResponse;
@@ -23,7 +22,7 @@ import com.hetao.grasseed.service.MallService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@RestController
+@Controller
 @RequestMapping(value = "/mall")
 @Slf4j
 @EnableJpaAuditing
@@ -38,6 +37,7 @@ public class MallController {
 	 * @return
 	 */
 	@PostMapping("/o/productList")
+	@ResponseBody
 	public GrasseedResponse productList(){
 		log.info("productList===");	
 		return mallService.productList();
@@ -49,6 +49,7 @@ public class MallController {
 	 * @return
 	 */
 	@PostMapping("/o/productDetail")
+	@ResponseBody
 	public GrasseedResponse productDetail(@Validated @RequestBody OneProductRequest req){
 		log.info("productDetail==="+req);	
 		return mallService.productDetail(req);
