@@ -34,4 +34,12 @@ public class WxUtil {
 		}
 		return accessToken;
 	}
+
+	public String getOpenIdOfUser(String code) {
+		log.info("====url:"+"https://api.weixin.qq.com/sns/oauth2/access_token?appid="+appId+"&secret="+appSecret+"&code="+code+"&grant_type=authorization_code");
+		String result = HttpsUtils.get("https://api.weixin.qq.com/sns/oauth2/access_token?appid="+appId+"&secret="+appSecret+"&code="+code+"&grant_type=authorization_code");
+		JSONObject obj = JSON.parseObject(result);
+		String openId= obj.getString("openid");
+		return openId;
+	}
 }

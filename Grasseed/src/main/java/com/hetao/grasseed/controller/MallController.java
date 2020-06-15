@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hetao.grasseed.common.https.HttpsUtils;
+import com.hetao.grasseed.common.util.WxUtil;
 import com.hetao.grasseed.model.request.OneProductRequest;
 import com.hetao.grasseed.model.response.GrasseedResponse;
 import com.hetao.grasseed.service.MallService;
@@ -31,6 +33,8 @@ public class MallController {
 	@Autowired
 	private MallService mallService;
 	
+	@Autowired
+	private WxUtil wxUtil;
 	/**
 	 * 查询商品列表
 	 * @param req
@@ -61,9 +65,11 @@ public class MallController {
 		String code = request.getParameter("code");
 		String productCode = request.getParameter("productCode");
 		String price = request.getParameter("price");
+		
+		String openId = wxUtil.getOpenIdOfUser(code);
 		//String url = URLDecoder.decode(request.getParameter("url"), "UTF-8");
 		//url = url+(url.indexOf("?")<0 ?"?":"&")+"code="+code;
-		log.info("code:"+code+"==productCode:"+productCode+"==price:"+price);
+		log.info("code:"+code+"==productCode:"+productCode+"==price:"+price+"==openId:"+openId);
 		//response.sendRedirect(url);
 	}
 }
