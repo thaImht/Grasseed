@@ -17,9 +17,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hetao.grasseed.common.https.HttpsUtils;
+import com.hetao.grasseed.common.util.IPUtil;
 import com.hetao.grasseed.common.util.WxUtil;
+import com.hetao.grasseed.dao.MallOrderRepository;
+import com.hetao.grasseed.dao.ProductRepository;
+import com.hetao.grasseed.model.entity.MallOrder;
+import com.hetao.grasseed.model.entity.Product;
+import com.hetao.grasseed.model.enumeration.OrderStatusEnum;
 import com.hetao.grasseed.model.request.OneProductRequest;
 import com.hetao.grasseed.model.response.GrasseedResponse;
+import com.hetao.grasseed.model.response.PayOrderResponse;
 import com.hetao.grasseed.service.MallService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +39,12 @@ public class MallController {
 
 	@Autowired
 	private MallService mallService;
+	
+	@Autowired
+	private MallOrderRepository mallOrderRepository;
+	
+	@Autowired
+	private ProductRepository productRepository;
 	
 	@Autowired
 	private WxUtil wxUtil;
@@ -66,10 +79,22 @@ public class MallController {
 		String productCode = request.getParameter("productCode");
 		String price = request.getParameter("price");
 		
+		Product product = productRepository.findByProductCode(productCode);
+		if(!product.getPrice().equals(Integer.valueOf(price))) {
+			response.sendRedirect("/errorPage");
+		}
 		String openId = wxUtil.getOpenIdOfUser(code);
-		//String url = URLDecoder.decode(request.getParameter("url"), "UTF-8");
-		//url = url+(url.indexOf("?")<0 ?"?":"&")+"code="+code;
 		log.info("code:"+code+"==productCode:"+productCode+"==price:"+price+"==openId:"+openId);
-		//response.sendRedirect(url);
+		
+		MallOrder order = mallService.addOrder(openId,productCode,price);
+		
+		String ip = IPUtil.getRemoteIP(request);
+		PayOrderResponse payOrderResponse = mallService.pay(order,ip);
+		
+		order.setStatus(OrderStatusEnum.PAYING.getStatus());
+		order.setReturnUrl(payOrderResponse.getValue());
+		mallOrderRepository.save(order);
+		
+		response.sendRedirect("/payPage?orderId="+payOrderResponse.getOrderId()+"&value="+payOrderResponse.getValue());
 	}
 }

@@ -1,6 +1,5 @@
 package com.hetao.grasseed.model.entity;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -36,9 +35,6 @@ public class OrderPurchase {
 
     @Column(length = 20)
     private String productCode;//商品码
-
-    @Column(length = 50)
-    private String productName;//商品名称
     
     private Integer purchaseNumber;//购买数量
 

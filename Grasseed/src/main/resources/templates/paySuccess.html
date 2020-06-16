@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>支付成功页</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+    </script>
+ <style type="text/css">
+body {
+	width: 100%;
+	background: #fff;
+	height: 100%;
+	flex-wrap: wrap;
+}
+</style>
+    <script>
+    var orderId = getQueryVariable("orderId");
+    function getQueryVariable(variable){
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable){return pair[1];}
+       }
+       return(false);
+    }
+    
+    $("#payInfo").text("支付成功!订单号："+orderId);
+    </script>
+</head>
+<body>
+<div id='payInfo'></div> 
+<div><a href="productList" >返回课程列表</a></div>
+</body>
+</html>

@@ -53,10 +53,26 @@
 			<version>1.2.58</version>
 		</dependency>
 		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.7</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
             <groupId>net.lshift.diffa</groupId>
             <artifactId>snowflake</artifactId>
             <version>1.7.0</version>
         </dependency>
+        <!-- PKCS7Padding -->
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>1.55</version>
+		</dependency>
 		<!-- db start -->
 		<dependency>
 			<groupId>mysql</groupId>

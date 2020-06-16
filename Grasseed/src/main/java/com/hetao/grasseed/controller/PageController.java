@@ -23,4 +23,22 @@ public class PageController {
 		log.info("productDetail html===");	
         return new ModelAndView("productDetail");
     }
+	
+	@GetMapping("payPage")
+    public ModelAndView payPage() {
+		log.info("payPage html===");	
+        return new ModelAndView("payPage");
+    }
+	
+	@GetMapping("paySuccess")
+    public ModelAndView paySuccess() {
+		log.info("paySuccess html===");	
+        return new ModelAndView("paySuccess");
+    }
+	
+	@GetMapping("errorPage")
+    public ModelAndView errorPage() {
+		log.info("errorPage html===");	
+        return new ModelAndView("errorPage");
+    }
 }

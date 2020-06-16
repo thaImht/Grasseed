@@ -7,11 +7,11 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +26,13 @@ import com.alibaba.fastjson.JSONObject;
 import com.hetao.grasseed.common.https.HttpsUtils;
 import com.hetao.grasseed.common.util.WxInfoUtil;
 import com.hetao.grasseed.common.util.WxUtil;
+import com.hetao.grasseed.dao.MallOrderRepository;
 import com.hetao.grasseed.dao.WxUserInfoRepository;
+import com.hetao.grasseed.integration.WxPayUtil;
+import com.hetao.grasseed.model.entity.MallOrder;
 import com.hetao.grasseed.model.entity.WxUserInfo;
+import com.hetao.grasseed.service.ChannelPayService;
+import com.hetao.grasseed.service.model.PayOrderResult;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -41,6 +46,12 @@ public class WxController {
 	
 	@Autowired
 	private WxUserInfoRepository userInfoRepository;
+	
+	@Autowired
+	private MallOrderRepository mallOrderRepository;
+	
+	@Resource(name = "wxPayJsapiChannelServiceImpl")
+	private ChannelPayService channelPayService;
 	
 	@GetMapping("/wx/o/notify")
 	@ResponseBody
@@ -165,7 +176,7 @@ public class WxController {
 	 */
 	@RequestMapping("/MP_verify_e7pVkVyrfI0GcSDA.txt")
 	public void file(HttpServletResponse response){
-		Resource resource = new ClassPathResource("MP_verify_e7pVkVyrfI0GcSDA.txt");
+		org.springframework.core.io.Resource resource = new ClassPathResource("MP_verify_e7pVkVyrfI0GcSDA.txt");
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		try {
 			InputStream  fis = resource.getInputStream();
@@ -233,4 +244,28 @@ public class WxController {
 		return result;
 	}
 	
+	@PostMapping("/wx/o/pay/notify")
+	@ResponseBody
+	public String orderNotify(@RequestBody String notifyXml) {
+		Map<String, String> result = new HashMap<>();
+		try {
+			log.info("notifyXml==" + notifyXml);
+            PayOrderResult payOrderResult = channelPayService.orderNotify(notifyXml);
+			log.info("payOrderResult==" + payOrderResult);
+			MallOrder order = mallOrderRepository.findById(Long.valueOf(payOrderResult.getPaymentId())).get();
+			order.setStatus(payOrderResult.getStatus());
+			order.setPayTime(payOrderResult.getPayTime());
+			order.setFailReason(payOrderResult.getFailReason());
+			order.setOutPaymentId(payOrderResult.getOutPaymentId());
+			order.setOutStatus(payOrderResult.getOutStatus());
+			order.setOutStatusDescription(payOrderResult.getStatusDescription());
+			mallOrderRepository.save(order);
+			result.put(WxPayUtil.RETURN_CODE, WxPayUtil.SUCCESS);
+		} catch (Throwable throwable) {
+			log.error("WxPaymentController.orderNotify error", throwable);
+			result.put(WxPayUtil.RETURN_CODE, WxPayUtil.FAIL);
+		}
+
+		return WxPayUtil.mapToXml(result);
+	}
 }
