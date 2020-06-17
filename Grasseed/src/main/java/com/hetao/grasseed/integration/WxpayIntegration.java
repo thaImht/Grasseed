@@ -43,15 +43,15 @@ public class WxpayIntegration {
     @PostConstruct
     public void init() throws Exception {
 
-        mchId = CryptUtil.pkcs7Decode(
-                CryptUtil.base64Decode(mchId),
-                config.getBytes()
-        );
-
-        key = CryptUtil.pkcs7Decode(
-                CryptUtil.base64Decode(key),
-                config.getBytes()
-        );
+//        mchId = CryptUtil.pkcs7Decode(
+//                CryptUtil.base64Decode(mchId),
+//                config.getBytes()
+//        );
+//
+//        key = CryptUtil.pkcs7Decode(
+//                CryptUtil.base64Decode(key),
+//                config.getBytes()
+//        );
 
         InputStream in = WxpayIntegration.class.getResourceAsStream("/config/apiclient_cert.p12");
         try {
