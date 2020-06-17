@@ -7,7 +7,7 @@
     <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
     <script>
     var appId = "wx5ee2acdc34ef926d";
-    var timeStamp = parseInt(new Date().getTime()/1000);
+    var timeStamp = parseInt(new Date().getTime()/1000).toString();
     var nonceStr = randomString();
     var value = JSON.parse(decodeURIComponent(getQueryVariable("value")));
     
@@ -42,7 +42,6 @@
     	         "paySign": sign //微信签名 
     	      },
     	      function(res){
-    	      alert("res.err_msg=="+res.err_msg);
     	      if(res.err_msg ==="get_brand_wcpay_request:ok" ){
     	          // 使用以上方式判断前端返回,微信团队郑重提示：
     	          //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
