@@ -27,14 +27,6 @@ public class IdGenerator implements Configurable,IdentifierGenerator{
 
     private IdProvider idProvider;
 
-
-    @PostConstruct
-    public void init() throws UnknownHostException {
-        IdProvider idProvider = new SnowflakeIdProvider(127);
-        ((SnowflakeIdProvider) idProvider).setTimeFn(() -> System.currentTimeMillis() / 1000);
-        this.idProvider = idProvider;
-    }
-
     public synchronized Long getNextId() throws RuntimeException {
         try {
             return  idProvider.getId();
@@ -59,8 +51,9 @@ public class IdGenerator implements Configurable,IdentifierGenerator{
 
 	@Override
 	public void configure(Type arg0, Properties arg1, ServiceRegistry arg2) throws MappingException {
-		// TODO Auto-generated method stub
-		
+		IdProvider idProvider = new SnowflakeIdProvider(127);
+        ((SnowflakeIdProvider) idProvider).setTimeFn(() -> System.currentTimeMillis() / 1000);
+        this.idProvider = idProvider;
 	}
 
 
