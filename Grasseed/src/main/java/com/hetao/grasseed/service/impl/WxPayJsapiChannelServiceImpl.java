@@ -52,7 +52,7 @@ public class WxPayJsapiChannelServiceImpl extends WxPayBaseChannelService {
         }
 
         PayOrderResponse payOrderResponse = new PayOrderResponse();
-        payOrderResponse.setOrderId(request.getPayAmount().toString());
+        payOrderResponse.setOrderId(request.getPaymentId());
         payOrderResponse.setValue(JSON.toJSONString(payMap));
         return payOrderResponse;
     }

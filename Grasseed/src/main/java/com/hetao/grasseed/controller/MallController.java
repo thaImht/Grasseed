@@ -3,6 +3,7 @@ package com.hetao.grasseed.controller;
 
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -95,6 +96,6 @@ public class MallController {
 		order.setReturnUrl(payOrderResponse.getValue());
 		mallOrderRepository.save(order);
 		
-		response.sendRedirect("/payPage?orderId="+payOrderResponse.getOrderId()+"&value="+payOrderResponse.getValue());
+		response.sendRedirect("http://www.grasseed.com/payPage?orderId="+payOrderResponse.getOrderId()+"&value="+URLEncoder.encode(payOrderResponse.getValue()));
 	}
 }
