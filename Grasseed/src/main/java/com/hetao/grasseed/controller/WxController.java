@@ -220,8 +220,8 @@ public class WxController {
 		JSONArray subButton1s  = new JSONArray();
 		JSONObject button11 = new JSONObject();
 		button11.put("type", "view");
-		button11.put("name", "精品课程");
-		button11.put("url", "http://www.grasseed.com/productList");
+		button11.put("name", "隋唐楷书");
+		button11.put("url", "http://www.grasseed.com/productDetail?productCode=P001");
 		subButton1s.add(button11);
 		button1.put("name", "课程介绍");
 		button1.put("sub_button", subButton1s);
