@@ -6,11 +6,12 @@
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
     </script>
      <style type="text/css">
-    #list {
+#list {
     width: 100%;
     background: #fff;
     height: 100%;
     flex-wrap: wrap;
+    font-family: cursive;
 }
 li  {
     cursor: pointer;
@@ -41,15 +42,52 @@ p{
      color: #333;
      font-family: "FZLTHJ";
 }
+#title{
+    color: #007979;
+    font-size: 35px;
+    text-align:center;
+}
+#content{
+    color: #000000;
+    font-size: 30px;
+    text-align:left;
+    line-height: 70px;
+}
 #buy{
     background-color: #FF5E53;
     color: #fff;
     font-size: 25px;
     line-height: 60px;
     display: inline-block;
-    float: left;
-    width: 30%;
+    float: right;
+    width: 50%;
     text-align:center;
+}
+#footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 10;
+    width: 100%;
+}
+#productPrice{
+    color: #000000;
+    font-size: 30px;
+    float: left;
+    width: 50%;
+    text-align: center;
+    line-height: 60px;
+    display:inline;
+}
+.b{
+    font-weight: bold;
+    color: #000000;
+    font-size: 30px;
+    text-align:left;
+    line-height: 70px;
+}
+.price{
+   display:inline
 }
 </style>
     <script>
@@ -115,10 +153,64 @@ p{
 <div id='list'>
     <li >
 		<img  src="/picture/kecheng.jpg">
-		<p id='productName'></p>
-		<p id='description'></p>
-		<p id='productPrice'></p>
-		<a id='buy'>立即购买</a>
+		<div id='title'>一、课程设置</div>
+		<div id='content'>&nbsp&nbsp楷书是我们日常书写中通行最广泛的书体。学习楷书是对结体和点画精准度的把握，通过学习充分理解楷书的结体平衡欹侧之美，为以后的行草打下坚实的基础。有了扎实的手上功夫才能为日后的自由发挥给与最大的空间。</div>
+		<p id='content'></p>
+		<div id='content'>* 此次楷书进阶课程的法帖选用墨迹本，以便初学书法的同学更清晰了解笔法。</div>
+		<div id='content'>* 此次的书体选用了隋朝智永的千字文、唐朝时期的褚遂良以及颜真卿的书法。课程中会对三本字帖进行比对，让学员更深入了解每本法贴。</div>
+		<div id='content'>* 课程中会对唐楷结体的精准度以及笔法的精到做详细的讲解，让学员们了解何为唐法。</div>
+		<div id='content'>* 课程中三位书家的历史背景、个人事迹及书论进行介绍。</div>
+		<p id='content'></p>
+		<div id='content'>《智永千字文》智永</div>
+		<div id='content'>《阴符经》褚遂良</div>
+		<div id='content'>《自书告身》颜真卿</div>
+		<p id='content'></p>
+		<p id='content'></p>
+		<div id='title'>二、上课形式</div>
+		<p id='content'></p>
+		<div id='content'><span class='b'>上课形式：</span>线上直播（钉钉）</div>
+		<div id='content'><span class='b'>课程时间：</span>60分钟 40分钟讲课+20分钟作业点评</div>
+		<div id='content'><span class='b'>课程视频：</span>可无限次观看复习。</div>
+		<div id='content'><span class='b'>每周作业：</span>上课前两天上传至作业区。</div>
+		<div id='content'><span class='b'>课件分享：</span>老师会将部分课件发送至课件区（保存时间6个月），请及时下载保存。</div>
+		<div id='content'><span class='b'>视频课程：</span>课程视频不提供下载，每次直播后可在钉钉班级内反复观看和学习。禁止以任何形式下载、复制、录制、剪辑、编辑与课程有关的视频、音频资料。</div>
+		<p id='content'></p>
+		<p id='content'></p>
+		<div id='title'>三、作业互动</div>
+		<p id='content'></p>
+		<div id='content'><span class='b'>课后作业：</span>每次的进步来自于得法的日常练习，老师会根据当次课程内容布置作业，老师和助教们会督促并帮助大家完成作业</div>
+		<div id='content'><span class='b'>作业答疑：</span>老师会在课中用20分钟将同学们当前共同的、较为突出的问题并进行答疑。课后可在微信群里提问，助教老师会视具体情况答疑。</div>
+		<div id='content'><span class='b'>互动：</span>课中有任何学习中的问题可在直播课中提问，同老师互动，也可在课后微信群里提问</div>
+		<p id='content'></p>
+		<p id='content'></p>
+		<div id='title'>四、学费</div>
+		<p id='content'></p>
+		<div id='content'><span class='b'>课程名称：</span>沐君老师零基础《字在书法》直播课—隋唐楷书</div>
+		<div id='content'><span class='b'>上课时间：</span>每周六上午10点</div>
+		<div id='content'><span class='b'>课时：</span>20节课，每次60分钟</div>
+		<div id='content'><span class='b'>学费：</span>折扣价2880元</div>
+        <p id='content'></p>
+		<p id='content'></p>
+		<div id='title'>五、在哪里上课</div>
+		<p id='content'></p>
+		<div id='content'>您需先下载钉钉app，教室会在微信班群里提供钉钉教室的二维码，您只需用钉钉扫码进群。</div>
+        <p id='content'></p>
+		<p id='content'></p>
+		<div id='title'>六、学习的文具准备</div>
+		<p id='content'></p>
+		<div id='content'>1）字帖（看下列表格，建议购买上海书画出版社出版的字帖）</div>
+		<div id='content'>2）半生熟宣纸</div>
+		<div id='content'>3）兼毫毛笔</div>
+		<div id='content'>4）毛毡</div>
+		<div id='content'>5）墨，墨蝶</div>
+		<div id='content'>6）镇纸</div>
+		<div id='content'>可联系客服进行购买。</div>
+		<p id='content'></p>
+		<p id='content'></p>
+	<footer id='footer'>
+	   <div class='price' id='productPrice'></div> 
+	   <div class='price'><a id='buy'>立即购买</a></div>
+	</footer>
 	</li>
 </div>
 </body>
