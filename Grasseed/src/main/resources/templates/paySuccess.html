@@ -13,10 +13,10 @@ body {
 	flex-wrap: wrap;
 }
 #payInfo{
-   font-size: 25px;
+   font-size: 32px;
 }
 #back{
-   font-size: 25px;
+   font-size: 32px;
 }
 </style>
     <script>
@@ -31,7 +31,9 @@ body {
        return(false);
     }
     
-    $("#payInfo").text("支付成功!订单号："+orderId);
+    $(document).ready(function(){
+         $("#payInfo").text("支付成功! 订单号："+orderId);
+    });
     </script>
 </head>
 <body>
